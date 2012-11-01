@@ -1,0 +1,126 @@
+eth1      Scan completed :
+          Cell 01 - Address: 00:24:D2:5A:C8:7A
+                    ESSID:"bubenectiVlci"
+                    Mode:Managed
+                    Frequency:2.422 GHz (Channel 3)
+                    Quality:4/5  Signal level:-62 dBm  Noise level:-90 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : TKIP
+                        Authentication Suites (1) : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 02 - Address: 00:24:D2:5A:C8:7B
+                    ESSID:"VOIP"
+                    Mode:Managed
+                    Frequency:2.422 GHz (Channel 3)
+                    Quality:4/5  Signal level:-62 dBm  Noise level:-90 dBm
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 03 - Address: 00:3A:98:AA:2C:80
+                    ESSID:"eduroam"
+                    Mode:Managed
+                    Frequency:2.432 GHz (Channel 5)
+                    Quality:2/5  Signal level:-71 dBm  Noise level:-88 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : 802.1x
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : TKIP
+                        Authentication Suites (1) : 802.1x
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 6 Mb/s; 9 Mb/s
+                              11 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 04 - Address: E8:39:DF:BE:D7:8D
+                    ESSID:"azor"
+                    Mode:Managed
+                    Frequency:2.432 GHz (Channel 5)
+                    Quality:3/5  Signal level:-69 dBm  Noise level:-90 dBm
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : TKIP
+                        Authentication Suites (1) : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 05 - Address: 00:21:27:EE:10:50
+                    ESSID:"TP-LINK"
+                    Mode:Managed
+                    Frequency:2.437 GHz (Channel 6)
+                    Quality:4/5  Signal level:-58 dBm  Noise level:-87 dBm
+                    IE: WPA Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (2) : TKIP CCMP
+                        Authentication Suites (1) : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              12 Mb/s; 24 Mb/s; 36 Mb/s; 9 Mb/s; 18 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 06 - Address: 00:23:CD:1B:24:84
+                    ESSID:"Sitovka"
+                    Mode:Managed
+                    Frequency:2.442 GHz (Channel 7)
+                    Quality:1/5  Signal level:-86 dBm  Noise level:-87 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    IE: Unknown: DD880050F204104A0001101044000102103B00010310470010000000000000100000000023CD1B24841021000754502D4C494E4B10230009544C2D57523734304E10240003312E3010420003312E301054000800060050F204000110110020576972656C657373204C697465204E20526F7574657220544C2D57523734304E100800020086103C000101
+                    IE: WPA Version 1
+                        Group Cipher : CCMP
+                        Pairwise Ciphers (1) : CCMP
+                        Authentication Suites (1) : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 07 - Address: 00:1B:FC:D2:13:83
+                    ESSID:"default"
+                    Mode:Managed
+                    Frequency:2.462 GHz (Channel 11)
+                    Quality:2/5  Signal level:-79 dBm  Noise level:-90 dBm
+                    Encryption key:off
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+                              24 Mb/s; 36 Mb/s; 54 Mb/s; 6 Mb/s; 9 Mb/s
+                              12 Mb/s; 48 Mb/s
+          Cell 08 - Address: E8:39:DF:C4:3B:46
+                    ESSID:"OlasGrandes"
+                    Mode:Managed
+                    Frequency:2.412 GHz (Channel 1)
+                    Quality:2/5  Signal level:-74 dBm  Noise level:-90 dBm
+                    IE: IEEE 802.11i/WPA2 Version 1
+                        Group Cipher : TKIP
+                        Pairwise Ciphers (1) : TKIP
+                        Authentication Suites (1) : PSK
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 09 - Address: E8:39:DF:C4:3B:47
+                    ESSID:"VOIP"
+                    Mode:Managed
+                    Frequency:2.412 GHz (Channel 1)
+                    Quality:2/5  Signal level:-74 dBm  Noise level:-90 dBm
+                    Encryption key:on
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 6 Mb/s
+                              9 Mb/s; 12 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s
+                              48 Mb/s; 54 Mb/s
+          Cell 10 - Address: 00:4F:74:30:6F:48
+                    ESSID:"airlive"
+                    Mode:Managed
+                    Frequency:2.427 GHz (Channel 4)
+                    Quality:1/5  Signal level:-80 dBm  Noise level:-90 dBm
+                    IE: Unknown: DDA40050F204104A0001101044000101103B00010310470010775B6680BFDE11D38D2F004F74306F48102100074169724C69766510230007574E2D3230305210240007574E2D323030521042002000000000000000000000000000000000000000000000000000000000000000001054000800060050F20400011011001D31314E20576972656C6573732042726F616462616E6420526F75746572100800020084103C000101
+                    Encryption key:off
+                    Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 9 Mb/s
+                              18 Mb/s; 36 Mb/s; 54 Mb/s; 6 Mb/s; 12 Mb/s
+                              24 Mb/s; 48 Mb/s
+
