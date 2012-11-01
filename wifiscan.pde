@@ -1,5 +1,5 @@
 float HIGH = -40;
-float LOW = -90;
+float LOW = -100;
 float SPEED = 300.0;
 
 int CYCLE = 10;
@@ -9,14 +9,15 @@ boolean hasnew;
 String raw[];
 ArrayList <AccessPoint> ap;
 ArrayList essids,signals;
-
+PFont font;
 
 
 void setup(){
 
   size(1024,600,P2D);
 
-  textFont(loadFont("65Amagasaki-8.vlw"));
+font = loadFont("65Amagasaki-8.vlw");
+  textFont(font);
   textMode(SCREEN);
   
   noCursor();
@@ -53,18 +54,19 @@ void parse(){
     if(raw[i].indexOf("ESSID")>-1){
       String essidln = raw[i];
       String[] vars = splitTokens(essidln,":\"\t ");
-      if(vars.length>=1)
+      try{
       essids.add(vars[1]);
+      }catch(Exception e){;}
     }
     if(raw[i].indexOf("Quality")>-1){
       String essidln = raw[i];
       String[] vars = splitTokens(essidln,"= /:");
-      if(vars.length>=5){
-      float perc = parseFloat(vars[5]);
+      try{
+        float perc = parseFloat(vars[5]);
       
       //println(vars[5]);
       signals.add(perc);
-      }
+      }catch(Exception e){;}
     }
 
 
@@ -106,7 +108,13 @@ void castObjects(){
 void draw(){
 
 
-  background(hasnew?255:0);
+  background(0);
+  
+  if(hasnew){
+   fill(255);
+   noStroke();
+  rect(10,10,30,30); 
+  }
   
   
   hasnew = false;
@@ -169,7 +177,7 @@ class AccessPoint{
 
   void plot(){
     beginShape();
-    stroke(c);
+    stroke(c,90);
     noFill();
 
     float lastval = 0;
