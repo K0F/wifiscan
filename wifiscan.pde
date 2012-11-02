@@ -1,3 +1,7 @@
+/* Wi-fi scanner by Kof 2012
+ *
+ */
+
 float HIGH = -40;
 float LOW = -100;
 float SPEED = 300.0;
@@ -8,18 +12,20 @@ boolean hasnew;
 
 String raw[];
 ArrayList <AccessPoint> ap;
-ArrayList essids,signals;
+ArrayList essids, signals, locked;
 PFont font;
+PImage lck;
 
+void setup() {
 
-void setup(){
+  size(1024, 600, P2D);
 
-  size(1024,600,P2D);
-
-font = loadFont("65Amagasaki-8.vlw");
+  font = loadFont("65Amagasaki-8.vlw");
   textFont(font);
   textMode(SCREEN);
-  
+
+  lck = loadImage("lock.png");
+
   noCursor();
 
   textAlign(RIGHT);
@@ -30,77 +36,95 @@ font = loadFont("65Amagasaki-8.vlw");
   essids = new ArrayList();
   signals = new ArrayList();
 
+  locked = new ArrayList();
+
   reload();
 
 }
 
-void reload(){
+void reload() {
 
   raw = loadStrings("scan.txt");
 
-  if(raw.length>0)
+  if (raw.length>0)
     parse();
 
 }
 
-void parse(){
+void parse() {
 
   essids = new ArrayList();
   signals = new ArrayList();
-
-  for(int i = 0 ; i < raw.length; i++){
+  locked = new ArrayList(); 
+  for (int i = 0 ; i < raw.length; i++) {
 
 
     if(raw[i].indexOf("ESSID")>-1){
       String essidln = raw[i];
-      String[] vars = splitTokens(essidln,":\"\t ");
-      try{
-      essids.add(vars[1]);
-      }catch(Exception e){;}
+      String[] vars = splitTokens(essidln, ":\"\t ");
+      try {
+        essids.add(vars[1]);
+      }
+      catch(Exception e) {
+        ;
+      }
     }
-    if(raw[i].indexOf("Quality")>-1){
+    if (raw[i].indexOf("Quality")>-1) {
       String essidln = raw[i];
-      String[] vars = splitTokens(essidln,"= /:");
-      try{
+      String[] vars = splitTokens(essidln, "= /:");
+      try {
         float perc = parseFloat(vars[5]);
-      
-      //println(vars[5]);
-      signals.add(perc);
-      }catch(Exception e){;}
+
+        //println(vars[5]);
+        signals.add(perc);
+      }
+      catch(Exception e) {
+        ;
+      }
     }
 
+    if (raw[i].indexOf("Encryption")>-1) {
+      String essidln = raw[i];
+      String[] vars = splitTokens(essidln, ":");
+      try {
+        boolean on = vars[1].equals("on");
 
+        //println(vars[5]);
+        locked.add(on);
+      }
+      catch(Exception e) {
+        ;
+      }
+    }
   }
+
 
   castObjects();
 
 }
 
-void castObjects(){
+void castObjects() {
 
-  if(essids.size()==signals.size())
-  for(int i = 0 ; i < essids.size();i++){
-    String name = (String)essids.get(i);
-    float signal = (Float)signals.get(i);
+  if (essids.size()==signals.size())
+    for (int i = 0 ; i < essids.size();i++) {
+      String name = (String)essids.get(i);
+      float signal = (Float)signals.get(i);
+      boolean lock = (Boolean)locked.get(i);
 
+      boolean isonlist = false;
+      for (int q =  0 ; q < ap.size();q++) {
+        AccessPoint tmp = (AccessPoint)ap.get(q);
+        if (tmp.name.equals(name)) {
+          isonlist = true;
+          tmp.setSignal(signal);
+        }
+      }
 
-    boolean isonlist = false;
-    for(int q =  0 ; q < ap.size();q++){
-      AccessPoint tmp = (AccessPoint)ap.get(q);
-      if(tmp.name.equals(name)){
-        isonlist = true;
-        tmp.setSignal(signal);
+      if (!isonlist) {
+        ap.add(new AccessPoint(name, signal, lock));
+        hasnew = true;
       }
     }
-
-    if(!isonlist){
-      ap.add(new AccessPoint(name,signal));
-      hasnew = true;  
-  }
-
-
-  } 
-
 }
 
 
@@ -109,26 +133,34 @@ void draw(){
 
 
   background(0);
-  
-  if(hasnew){
-   fill(255);
-   noStroke();
-  rect(10,10,30,30); 
+
+  if (hasnew) {
+    fill(255);
+    noStroke();
+    rect(10, 10, 30, 30);
   }
-  
-  
+
+
   hasnew = false;
-  
-  
-  if(frameCount%CYCLE==0){
+
+
+  if (frameCount%CYCLE==0) {
     reload();
   }
 
 
   fill(255);
 
+  HIGH = -200;
+  LOW = 200;
+  for (int i = 0 ; i < ap.size();i++) {
 
-  for(int i = 0 ; i < ap.size();i++){
+    AccessPoint tmp  = (AccessPoint)ap.get(i);
+    tmp.minmax();
+  }
+
+
+  for (int i = 0 ; i < ap.size();i++) {
 
     AccessPoint tmp  = (AccessPoint)ap.get(i);
 
@@ -146,9 +178,10 @@ class AccessPoint{
   float signal,ssignal;
   ArrayList graph;
   color c; 
-  float seen,lastseen;
+  float seen, lastseen;
+  boolean lock;
 
-  AccessPoint(String _name,float _signal){
+  AccessPoint(String _name, float _signal, boolean _lock) {
     name = _name;
 
     ssignal = signal = _signal;
@@ -172,10 +205,19 @@ class AccessPoint{
       
       if(lastseen>60000)
       ap.remove(this);
-      
   }
 
-  void plot(){
+  void minmax() {
+    for (int i = 0; i < graph.size();i++) {
+      float val = (Float)graph.get(i);
+      if (val>HIGH)
+        HIGH = val;
+      if (val<LOW)
+        LOW = val;
+    }
+  }
+
+  void plot() {
     beginShape();
     stroke(c,90);
     noFill();
@@ -183,16 +225,20 @@ class AccessPoint{
     float lastval = 0;
     for(int i = 0; i < graph.size();i++){
       float val = (Float)graph.get(i);
-      float mapped = map(val,HIGH,LOW,0,height);
-      vertex(i,mapped);
+      float mapped = map(val, LOW, HIGH, height-10, 10);
+      vertex(i+(width-graph.size()), mapped);
       lastval = mapped;
     }
     endShape();
 
 
     fill(c);
-    text(name,graph.size(),lastval);
+    text(name, width, lastval);
 
+    if (lock) {
+      //tint(c);
+      image(lck, width - textWidth(name)-7, (int)lastval-6);
+    }
   }
 
 
