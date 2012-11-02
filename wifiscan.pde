@@ -6,6 +6,9 @@ float HIGH = -40;
 float LOW = -100;
 float SPEED = 300.0;
 
+float slow = -100;
+float shigh = 100;
+
 int CYCLE = 10;
 
 boolean hasnew;
@@ -39,7 +42,6 @@ void setup() {
   locked = new ArrayList();
 
   reload();
-
 }
 
 void reload() {
@@ -48,7 +50,6 @@ void reload() {
 
   if (raw.length>0)
     parse();
-
 }
 
 void parse() {
@@ -59,7 +60,7 @@ void parse() {
   for (int i = 0 ; i < raw.length; i++) {
 
 
-    if(raw[i].indexOf("ESSID")>-1){
+    if (raw[i].indexOf("ESSID")>-1) {
       String essidln = raw[i];
       String[] vars = splitTokens(essidln, ":\"\t ");
       try {
@@ -100,12 +101,12 @@ void parse() {
 
 
   castObjects();
-
 }
 
 void castObjects() {
 
-  if (essids.size()==signals.size())
+  if (essids.size()==signals.size() && 
+      essids.size()==locked.size())
     for (int i = 0 ; i < essids.size();i++) {
       String name = (String)essids.get(i);
       float signal = (Float)signals.get(i);
@@ -129,7 +130,7 @@ void castObjects() {
 
 
 
-void draw(){
+void draw() {
 
 
   background(0);
@@ -159,6 +160,8 @@ void draw(){
     tmp.minmax();
   }
 
+  slow+=(LOW-slow)/20.0;
+  shigh+=(HIGH-shigh)/20.0;
 
   for (int i = 0 ; i < ap.size();i++) {
 
@@ -168,14 +171,26 @@ void draw(){
     tmp.plot();
   }
 
+  textAlign(LEFT);
+  fill(255);
+  text(ap.size()+" siti v dosahu",10,height-5);
 
+  stroke(255,30);
+  fill(255,40);
+  for(int i = -120; i < 0 ;i++){
+    float m = map(i,slow,shigh,height-10,10);
+    line(0,m,width,m);
+    text(i+" dBm",10,m);
+  }
+
+  textAlign(RIGHT);
 
 }
 
-class AccessPoint{
+class AccessPoint {
 
   String name;
-  float signal,ssignal;
+  float signal, ssignal;
   ArrayList graph;
   color c; 
   float seen, lastseen;
@@ -183,27 +198,29 @@ class AccessPoint{
 
   AccessPoint(String _name, float _signal, boolean _lock) {
     name = _name;
+
     lock = _lock;
+
     ssignal = signal = _signal;
-    c = color(random(255),200,255);
+    c = color(random(255), 200, 255);
     graph = new ArrayList();
     seen = millis();
   }
 
-  void setSignal(float _signal){
+  void setSignal(float _signal) {
     signal = _signal;
     seen = millis();
   }
 
-  void update(){
+  void update() {
     ssignal += (signal-ssignal)/SPEED;
     graph.add(ssignal);
-    if(graph.size()>width)
+    if (graph.size()>width)
       graph.remove(0);
 
     lastseen = (millis()-seen);
 
-    if(lastseen>60000)
+    if (lastseen>60000)
       ap.remove(this);
   }
 
@@ -219,13 +236,13 @@ class AccessPoint{
 
   void plot() {
     beginShape();
-    stroke(c,90);
+    stroke(c, 90);
     noFill();
 
     float lastval = 0;
-    for(int i = 0; i < graph.size();i++){
+    for (int i = 0; i < graph.size();i++) {
       float val = (Float)graph.get(i);
-      float mapped = map(val, LOW, HIGH, height-10, 10);
+      float mapped = map(val, slow, shigh, height-10, 10);
       vertex(i+(width-graph.size()), mapped);
       lastval = mapped;
     }
@@ -240,8 +257,5 @@ class AccessPoint{
       image(lck, width - textWidth(name)-7, (int)lastval-6);
     }
   }
-
-
 }
-
 
