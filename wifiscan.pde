@@ -2,6 +2,8 @@
  *
  */
 
+int TIMEOUT = 20000;
+
 float HIGH = -40;
 float LOW = -100;
 float SPEED = 300.0;
@@ -106,7 +108,7 @@ void parse() {
 void castObjects() {
 
   if (essids.size()==signals.size() && 
-      essids.size()==locked.size())
+    essids.size()==locked.size())
     for (int i = 0 ; i < essids.size();i++) {
       String name = (String)essids.get(i);
       float signal = (Float)signals.get(i);
@@ -170,11 +172,11 @@ void draw() {
     tmp.update();
     tmp.plot();
   }
-
+  
   textAlign(LEFT);
   fill(255);
   text(ap.size()+" siti v dosahu",10,height-5);
-
+  
   stroke(255,30);
   fill(255,40);
   for(int i = -120; i < 0 ;i++){
@@ -182,9 +184,9 @@ void draw() {
     line(0,m,width,m);
     text(i+" dBm",10,m);
   }
-
+  
   textAlign(RIGHT);
-
+  
 }
 
 class AccessPoint {
@@ -220,7 +222,7 @@ class AccessPoint {
 
     lastseen = (millis()-seen);
 
-    if (lastseen>60000)
+    if (lastseen>TIMEOUT)
       ap.remove(this);
   }
 
