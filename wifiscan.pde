@@ -183,7 +183,7 @@ class AccessPoint{
 
   AccessPoint(String _name, float _signal, boolean _lock) {
     name = _name;
-
+    lock = _lock;
     ssignal = signal = _signal;
     c = color(random(255),200,255);
     graph = new ArrayList();
@@ -200,10 +200,10 @@ class AccessPoint{
     graph.add(ssignal);
     if(graph.size()>width)
       graph.remove(0);
-      
-      lastseen = (millis()-seen);
-      
-      if(lastseen>60000)
+
+    lastseen = (millis()-seen);
+
+    if(lastseen>60000)
       ap.remove(this);
   }
 
